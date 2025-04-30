@@ -1,6 +1,22 @@
 name: BuildBattle
-version: '1.0.0'
+version: 1.0
 main: io.github.buildBattle.BuildBattle
-api-version: '1.21'
-authors: [ faustyu ]
-description: plugin for minecraft tournir
+api-version: 1.19
+description: Плагин для проведения командного конкурса строительства
+author: YourName
+commands:
+  buildbattle:
+    description: Основная команда плагина Build Battle
+    usage: /<command> [start|vote|score]
+    permission: buildbattle.use
+    permission-message: У вас нет прав на использование этой команды!
+permissions:
+  buildbattle.use:
+    description: Позволяет использовать основные команды плагина
+    default: true
+  buildbattle.admin:
+    description: Позволяет управлять игрой
+    default: op
+  buildbattle.judge:
+    description: Позволяет оценивать постройки
+    default: op
