@@ -1,0 +1,6 @@
+name: BuildBattle
+version: '1.0.0'
+main: io.github.buildBattle.BuildBattle
+api-version: '1.21'
+authors: [ faustyu ]
+description: plugin for minecraft tournir
