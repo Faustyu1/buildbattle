@@ -12,18 +12,19 @@ public final class BuildBattle extends JavaPlugin {
     private static BuildBattle instance;
     private FileConfiguration config;
     private List<String> themes;
-    private GameManager gameManager;
+    private BuildBattleGame game;
 
     @Override
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
         config = getConfig();
-        themes = new ArrayList<>();
-        gameManager = new GameManager(this);
+        loadThemes();
+        game = new BuildBattleGame(this);
         
-        getCommand("buildbattle").setExecutor(new BuildBattleCommand(this));
-        getServer().getPluginManager().registerEvents(new BuildBattleListener(this), this);
+        BuildBattleCommand commandHandler = new BuildBattleCommand(game);
+        getCommand("buildbattle").setExecutor(commandHandler);
+        getServer().getPluginManager().registerEvents(new BuildBattleListener(game, commandHandler), this);
         
         getLogger().info("BuildBattle plugin has been enabled!");
     }
@@ -33,12 +34,19 @@ public final class BuildBattle extends JavaPlugin {
         getLogger().info("BuildBattle plugin has been disabled!");
     }
 
+    private void loadThemes() {
+        themes = config.getStringList("themes");
+        if (themes.isEmpty()) {
+            getLogger().warning("Список тем пуст! Добавьте темы в config.yml");
+        }
+    }
+
     public static BuildBattle getInstance() {
         return instance;
     }
 
-    public GameManager getGameManager() {
-        return gameManager;
+    public BuildBattleGame getGame() {
+        return game;
     }
 
     public List<String> getThemes() {

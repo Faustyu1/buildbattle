@@ -55,6 +55,12 @@ public class GameManager {
             Bukkit.broadcastMessage("§cТочка сбора не установлена!");
             return;
         }
+
+        List<String> availableThemes = plugin.getThemes();
+        if (availableThemes.size() < 3) {
+            Bukkit.broadcastMessage("§cНедостаточно тем для голосования! Нужно минимум 3 темы.");
+            return;
+        }
         
         // Телепортируем всех игроков в точку сбора
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -71,9 +77,9 @@ public class GameManager {
     }
 
     private void selectRandomThemes() {
-        List<String> allThemes = plugin.getThemes();
+        List<String> allThemes = new ArrayList<>(plugin.getThemes());
         Collections.shuffle(allThemes);
-        selectedThemes = allThemes.subList(0, 3);
+        selectedThemes = allThemes.subList(0, Math.min(3, allThemes.size()));
         
         // Объявляем темы для голосования
         Bukkit.broadcastMessage("§6===== Темы для голосования =====");

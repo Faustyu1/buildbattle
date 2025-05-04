@@ -37,4 +37,4 @@ messages:
   game-start: "&aИгра Build Battle началась!"
   round-start: "&eНачался раунд %round%! Время на строительство: %time% минут"
   voting-start: "&eНачалось голосование! У вас есть %time% минут на оценку построек"
-  game-end: "&aИгра Build Battle завершена! Поздравляем победителей!" 
+  game-end: "&aИгра Build Battle завершена! Поздравляем победителей!"
